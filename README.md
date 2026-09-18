@@ -10,6 +10,7 @@ ihr vom Telefon schickt.
 
 | | |
 |---|---|
+| **Uhrzeit** | oben, durch einen Strich abgesetzt — sie steht IMMER da |
 | **Pfeil** | die Abbiegeart, links neben der Entfernung |
 | **Entfernung** | gross in LECO, unter 1 km in Metern, darüber in Kilometern mit einer Stelle |
 | **Balken** | erscheint unter 300 m und läuft leer — die Spanne, in der ein Blick aufs Handgelenk noch etwas ändert |

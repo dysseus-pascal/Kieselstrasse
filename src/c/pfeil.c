@@ -11,10 +11,12 @@ static GPathInfo s_umriss = { .num_points = 7, .points = s_punkte };
 static GPath *s_pfad;
 
 // Halbe Hoehe, halbe Kopfbreite, halbe Schaftbreite, Kopfhoehe.
-#define P_H  (KS_BREIT ? 17 : 12)
-#define P_K  (KS_BREIT ? 12 :  9)
-#define P_S  (KS_BREIT ?  5 :  4)
-#define P_KH (KS_BREIT ? 16 : 11)
+// Groesser als zuerst gebaut: am Steuer ist der Blick kurz, und ein Pfeil, den
+// man suchen muss, ist keiner.
+#define P_H  (KS_BREIT ? 21 : 15)
+#define P_K  (KS_BREIT ? 15 : 11)
+#define P_S  (KS_BREIT ?  6 :  5)
+#define P_KH (KS_BREIT ? 20 : 14)
 
 // OsmAnds TurnType. Die Namen stehen hier, damit man beim Lesen nicht in einer
 // anderen Datei nachschlagen muss.
