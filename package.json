@@ -1,0 +1,43 @@
+{
+  "name": "kieselstrasse",
+  "author": "dysseus-pascal",
+  "version": "0.1.0",
+  "license": "CC0-1.0",
+  "keywords": [
+    "pebble-app"
+  ],
+  "private": true,
+  "dependencies": {},
+  "pebble": {
+    "displayName": "Kieselstrasse",
+    "uuid": "a83bf269-e798-45bc-9bf0-a0f68362a79a",
+    "sdkVersion": "3",
+    "enableMultiJS": false,
+    "targetPlatforms": [
+      "emery",
+      "flint",
+      "gabbro"
+    ],
+    "watchapp": {
+      "watchface": false
+    },
+    "capabilities": [],
+    "messageKeys": [
+      "ABBIEGEART",
+      "ENTFERNUNG",
+      "STRASSE",
+      "ANKUNFT",
+      "REST"
+    ],
+    "resources": {
+      "media": [
+        {
+          "menuIcon": true,
+          "type": "bitmap",
+          "name": "IMAGE_ICON",
+          "file": "images/system_icon.png"
+        }
+      ]
+    }
+  }
+}
