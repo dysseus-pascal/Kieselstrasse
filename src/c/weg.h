@@ -48,6 +48,8 @@ bool weg_hat_zahl(void);
  * wie eine gueltige Anweisung - und man faehrt danach.
  */
 bool weg_veraltet(void);
+/** Nach so vielen Sekunden ohne Nachricht gilt ein Stand als veraltet. */
+int weg_veraltet_nach_s(void);
 
 /** "vor 12 min", "vor 3 Std", "gestern" - in `buf`. */
 void weg_alter_text(char *buf, size_t len);

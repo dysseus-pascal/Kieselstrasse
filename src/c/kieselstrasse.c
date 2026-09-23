@@ -60,8 +60,54 @@ static void prv_init(void) {
   app_message_open(256, 64);
 }
 
+// --- App Glance ---
+//
+// DIE ZEILE IM STARTER: der naechste Schritt, ohne die App zu oeffnen -
+// "250 m Bahnhofstrasse, an 14:32". Sie verfaellt von selbst, sobald der
+// Stand zu alt waere (KS_VERALTET_S nach dem Empfang): eine Zeile, die
+// gestern stehen blieb, saehe aus wie eine Anweisung fuer heute. Danach
+// steht "Keine Navigation" da, und das ist die Wahrheit.
+static void prv_glance(AppGlanceReloadSession *session, size_t limit, void *context) {
+  if (limit < 1) return;
+  const Weg *w = weg_stand();
+  char text[64];
+  time_t ablauf = APP_GLANCE_SLICE_NO_EXPIRATION;
+
+  if (!weg_veraltet() && (weg_hat_zahl() || w->strasse[0])) {
+    char zahl[16] = "";
+    if (weg_hat_zahl()) {
+      if (w->entfernung_m < 1000) {
+        snprintf(zahl, sizeof(zahl), "%d m ", (int)w->entfernung_m);
+      } else {
+        const int32_t zehntel = (w->entfernung_m + 50) / 100;
+        snprintf(zahl, sizeof(zahl), "%d,%d km ", (int)(zehntel / 10), (int)(zehntel % 10));
+      }
+    }
+    char an[16] = "";
+    if (w->ankunft > 0) {
+      struct tm *t = localtime(&w->ankunft);
+      snprintf(an, sizeof(an), ", an %02d:%02d", t->tm_hour, t->tm_min);
+    }
+    snprintf(text, sizeof(text), "%s%s%s", zahl, w->strasse, an);
+    ablauf = w->empfangen + weg_veraltet_nach_s();
+  } else {
+    snprintf(text, sizeof(text), "Keine Navigation");
+  }
+
+  const AppGlanceSlice slice = {
+    .layout = { .icon = APP_GLANCE_SLICE_DEFAULT_ICON, .subtitle_template_string = text },
+    .expiration_time = ablauf,
+  };
+  app_glance_add_slice(session, slice);
+}
+
+static void prv_deinit(void) {
+  app_glance_reload(prv_glance, NULL);
+}
+
 int main(void) {
   prv_init();
   app_event_loop();
+  prv_deinit();
   return 0;
 }

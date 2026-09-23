@@ -80,6 +80,8 @@ bool weg_veraltet(void) {
   return (time(NULL) - s_weg.empfangen) > KS_VERALTET_S;
 }
 
+int weg_veraltet_nach_s(void) { return KS_VERALTET_S; }
+
 void weg_alter_text(char *buf, size_t len) {
   if (s_weg.empfangen == 0) {
     snprintf(buf, len, "%s", "noch nie");

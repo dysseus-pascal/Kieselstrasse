@@ -95,6 +95,15 @@ Geschickt wird über die klassische PebbleKit-Schnittstelle
 `companionApp`-Eintrag** in ihrer `package.json`: ein Paketname dort wählt
 PebbleKit2, und das bindet sich an einen Dienst, statt zu senden.
 
+## Die Zeile im Starter
+
+Seit 0.3.0 steht der nächste Schritt auch im Startmenü der Uhr, unter dem
+Namen der App — »250 m Bahnhofstrasse, an 14:32« —, ohne dass man sie öffnet
+(*App Glance*). Die Zeile **verfällt von selbst** zehn Minuten nach dem
+letzten Empfang: eine, die gestern stehen blieb, sähe aus wie eine Anweisung
+für heute. Danach steht »Keine Navigation« da. Gesetzt wird sie beim
+Verlassen der App; solange die App offen ist, zeigt sie selbst.
+
 ## Ohne Telefon ausprobieren
 
 ```bash
@@ -117,6 +126,11 @@ vorkommen** — steht es zweimal, überschreibt die zweite Angabe die erste, und
 die Nachricht kommt lautlos unvollständig an.
 
 ## Bauen
+
+Auf GitHub baut jeder Push auf `main` die pbw neu, checkt sie ein und legt zu
+einer neuen Fassung in `package.json` ein Release an — wie bei den
+Schwesterapps (`.github/workflows/bauen.yml`). Die Notizen kommen aus
+`.github/release/<fassung>.md`.
 
 ```bash
 KIESELSTRASSE_SRC=<dieser Ordner> tools/sync_kieselstrasse.sh
