@@ -1,6 +1,7 @@
 #include <pebble.h>
 #include "nav_window.h"
 #include "pfeil.h"
+#include "strings.h"
 #include "theme.h"
 #include "weg.h"
 
@@ -109,13 +110,13 @@ static void prv_zeichne(Layer *layer, GContext *ctx) {
       return;
     }
     y = (int16_t)(y + (KS_BREIT ? 20 : 12));
-    graphics_draw_text(ctx, "Keine Navigation", prv_font_name(),
+    graphics_draw_text(ctx, S(STR_KEINE_NAVIGATION), prv_font_name(),
                        GRect(KS_RAND, y, breite, (KS_BREIT ? 32 : 24) * 2),
                        GTextOverflowModeWordWrap, GTextAlignmentCenter, NULL);
     char wann[28];
     weg_alter_text(wann, sizeof(wann));
     char zeile[40];
-    snprintf(zeile, sizeof(zeile), "zuletzt %s", wann);
+    snprintf(zeile, sizeof(zeile), S(STR_ZULETZT), wann);
     graphics_context_set_text_color(ctx, KS_COLOR_ZART);
     graphics_draw_text(ctx, zeile, prv_font_zart(),
                        GRect(KS_RAND, (int16_t)(y + (KS_BREIT ? 66 : 48)), breite, 48),
@@ -203,8 +204,9 @@ static void prv_zeichne(Layer *layer, GContext *ctx) {
     char hhmm[10];
     strftime(hhmm, sizeof(hhmm), clock_is_24h_style() ? "%H:%M" : "%I:%M", an);
     const size_t n = strlen(rest);
-    if (n > 0) snprintf(rest + n, sizeof(rest) - n, " · an %s", hhmm);
-    else snprintf(rest, sizeof(rest), "an %s", hhmm);
+    if (n > 0) snprintf(rest + n, sizeof(rest) - n, "%s", " · ");
+    const size_t m = strlen(rest);
+    snprintf(rest + m, sizeof(rest) - m, S(STR_ANKUNFT), hhmm);
   }
   if (rest[0]) {
     graphics_context_set_text_color(ctx, KS_COLOR_ZART);

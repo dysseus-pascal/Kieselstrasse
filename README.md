@@ -104,6 +104,24 @@ letzten Empfang: eine, die gestern stehen blieb, sähe aus wie eine Anweisung
 für heute. Danach steht »Keine Navigation« da. Gesetzt wird sie beim
 Verlassen der App; solange die App offen ist, zeigt sie selbst.
 
+## Sprache
+
+Seit 0.4.0 spricht die Uhr **Deutsch, Englisch, Französisch, Italienisch und
+Spanisch**. Sie folgt der Sprache, die auf der Uhr eingestellt ist; einen
+eigenen Schalter gibt es nicht. Für jede andere Sprache steht Englisch da —
+eine deutsche Anzeige auf einer polnischen Uhr wäre schlechter als eine
+englische.
+
+Übersetzt ist nur, was die Uhr **selbst** schreibt: »Keine Navigation«, wann
+zuletzt etwas kam, die Ankunftszeit (»an 14:32«, »ETA 14:32«, »arr. 14:32«,
+»lleg. 14:32«) und die Zeile im Starter. Alle Texte stehen in
+`src/c/strings_table.h`, eine Zeile je Text, mit dem Platz, den sie haben.
+
+**Strassennamen bleiben, wie sie kommen.** Sie stammen von OsmAnd, das sie
+schon in der Sprache des Telefons liefert. Die Einheiten `m` und `km` sind
+überall dieselben, und die Entfernung behält ihr Komma (»1,2 km«): die grosse
+Ziffernschrift der Uhr hat es sicher, einen Punkt nicht nachgesehen.
+
 ## Ohne Telefon ausprobieren
 
 ```bash

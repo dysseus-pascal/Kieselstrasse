@@ -1,5 +1,6 @@
 #include <pebble.h>
 #include "nav_window.h"
+#include "strings.h"
 #include "weg.h"
 
 // Wie oft hoechstens gesummt wird. Ein Netz unter dem Kern-Vergleich: sollte
@@ -48,6 +49,8 @@ static void prv_demo(void) {
 #endif
 
 static void prv_init(void) {
+  // Die Sprache zuerst: der erste Aufbau des Schirms braucht sie schon.
+  strings_refresh();
   weg_init();
 #ifdef KS_DEMO
   prv_demo();
@@ -86,12 +89,14 @@ static void prv_glance(AppGlanceReloadSession *session, size_t limit, void *cont
     char an[16] = "";
     if (w->ankunft > 0) {
       struct tm *t = localtime(&w->ankunft);
-      snprintf(an, sizeof(an), ", an %02d:%02d", t->tm_hour, t->tm_min);
+      char hhmm[8];
+      snprintf(hhmm, sizeof(hhmm), "%02d:%02d", t->tm_hour, t->tm_min);
+      snprintf(an, sizeof(an), S(STR_GLANCE_ANKUNFT), hhmm);
     }
     snprintf(text, sizeof(text), "%s%s%s", zahl, w->strasse, an);
     ablauf = w->empfangen + weg_veraltet_nach_s();
   } else {
-    snprintf(text, sizeof(text), "Keine Navigation");
+    snprintf(text, sizeof(text), "%s", S(STR_KEINE_NAVIGATION));
   }
 
   const AppGlanceSlice slice = {

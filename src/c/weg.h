@@ -51,7 +51,7 @@ bool weg_veraltet(void);
 /** Nach so vielen Sekunden ohne Nachricht gilt ein Stand als veraltet. */
 int weg_veraltet_nach_s(void);
 
-/** "vor 12 min", "vor 3 Std", "gestern" - in `buf`. */
+/** "vor 12 min", "vor 3 Std", "gestern" - in `buf`, in der Sprache der Uhr. */
 void weg_alter_text(char *buf, size_t len);
 
 /** Wie voll der Balken steht, 0..100, oder -1 fuer keinen. */

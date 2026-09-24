@@ -1,5 +1,6 @@
 #include <pebble.h>
 #include "weg.h"
+#include "strings.h"
 
 #define PERSIST_WEG 1
 
@@ -84,14 +85,14 @@ int weg_veraltet_nach_s(void) { return KS_VERALTET_S; }
 
 void weg_alter_text(char *buf, size_t len) {
   if (s_weg.empfangen == 0) {
-    snprintf(buf, len, "%s", "noch nie");
+    snprintf(buf, len, "%s", S(STR_ALTER_NIE));
     return;
   }
   const int32_t s = (int32_t)(time(NULL) - s_weg.empfangen);
-  if (s < 60) snprintf(buf, len, "%s", "gerade eben");
-  else if (s < 3600) snprintf(buf, len, "vor %d min", (int)(s / 60));
-  else if (s < 86400) snprintf(buf, len, "vor %d Std", (int)(s / 3600));
-  else snprintf(buf, len, "%s", "gestern oder frueher");
+  if (s < 60) snprintf(buf, len, "%s", S(STR_ALTER_JETZT));
+  else if (s < 3600) snprintf(buf, len, S(STR_ALTER_MIN), (int)(s / 60));
+  else if (s < 86400) snprintf(buf, len, S(STR_ALTER_STD), (int)(s / 3600));
+  else snprintf(buf, len, "%s", S(STR_ALTER_GESTERN));
 }
 
 int weg_balken_prozent(void) {
